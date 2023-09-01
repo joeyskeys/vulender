@@ -32,5 +32,11 @@ class CameraIO(BaseIO):
     def write_description(self):
         pass
 
-    def feed_api(self):
-        pass
+    def feed_api(self, cam, ratio):
+        cam.look_at(*self.get_camera_infos())
+
+        fov = self.get_fov()
+        props = self.get_props()
+        near = getattr(props, 'near', 1)
+        far = getattr(props, 'far', 1000)
+        cam.perspective(fov, ratio, near, far)

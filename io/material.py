@@ -11,5 +11,5 @@ class MaterialIO(BaseIO):
     def write_description(self, handle):
         pass
 
-    def feed_api(self):
+    def feed_api(self, obj):
         pass

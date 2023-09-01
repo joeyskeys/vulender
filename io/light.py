@@ -16,5 +16,14 @@ class LightIO(BaseIO):
     def write_description(self, handle):
         pass
 
-    def feed_api(self):
-        pass
+    def feed_api(self, obj, mgr):
+        light_type = obj.data.type
+        light_color = tuple(obj.data.color)
+        light_loc = obj.location
+        
+        if light_type == 'POINT':
+            pass
+        elif light_type == 'DIRECTION':
+            pass
+        else:
+            print('Type {} of {} is not supported yet'.format(light_type, obj.name))

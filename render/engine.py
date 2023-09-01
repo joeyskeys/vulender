@@ -4,6 +4,8 @@ import bpy
 import threading
 import time
 from .. import config
+from .. import pyvkkk as vk
+from ..io.scene import SceneIO
 from ..utils.registry import regular_registry
 
 
@@ -35,7 +37,9 @@ class BittoRenderEngine(bpy.types.RenderEngine):
         pass
 
     def render(self, depsgraph):
-        print("Currently just print 'rendering'")
+        ins = vk.VkInstance()
+        sceneio = SceneIO()
+        sceneio.feed_api(ins)
         # Setup rendering thread to keep blender responsive
         # self.render_thread = BittoRenderThread(self.renderer)
         # self.render_thread.start()

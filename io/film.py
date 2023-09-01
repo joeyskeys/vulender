@@ -14,6 +14,10 @@ class FilmIO(BaseIO):
     def get_resolution(self):
         render = bpy.context.scene.render
         return (render.resolution_x, render.resolution_y)
+    
+    def get_ratio(self):
+        render = bpy.context.scene.render
+        return render.resolution_x / render.resolution_y
 
     def get_props(self):
         return bpy.context.scene.bitto_film_props
@@ -21,5 +25,5 @@ class FilmIO(BaseIO):
     def write_description(self, handle):
         pass
 
-    def feed_api(self):
-        pass
+    def feed_api(self, ins):
+        ins.setup_resolution(*self.get_resolution())

@@ -2,31 +2,28 @@
 engine_name = "EXAMPLE_RENDER"
 engine_label = "Bitto_Example"
 
-film_props = (
+film_props = ()
+
+camera_props = (
     {
         'type' : 'float',
-        'name' : 'example',
-        'text' : 'Example',
+        'name' : 'near',
+        'text' : 'Near',
         'props' : {
-            'description' : 'this is a example property',
-            'default' : 0,
-            'min' : 0,
-            'max' : 1
+            'description' : 'Near clipping plane',
+            'default' : 1,
         }
     },
     {
-        'type' : 'string',
-        'name' : 'string_prop',
-        'text' : 'BlaBla',
+        'type' : 'float',
+        'name' : 'far',
+        'text' : 'Far',
         'props' : {
-            'description' : 'this is a example float property',
-            'default' : '',
-            'subtype' : 'FILE_PATH'
+            'description' : 'Far clipping plane',
+            'default' : 1000,
         }
-    }
+    },
 )
-
-camera_props = ()
 
 integrator_props = ()
 
