@@ -1,4 +1,4 @@
-
+import struct
 import bpy, bmesh
 from .base import BaseIO
 from ..utils import triangulate as tr
@@ -15,6 +15,13 @@ class MeshIO(BaseIO):
     def write_description(self, handle):
         pass
 
+    @staticmethod
+    def convert_to_bytes(data, tmask):
+        cnt = len(data[0])
+        ret = bytes()
+        for e in data:
+            ret += struct.pack(tmask * cnt, *e)
+
     def feed_api(self, obj, mgr):
         depgraph = bpy.context.evaluated_depsgraph_get()
         bm = bmesh.new()
@@ -27,5 +34,7 @@ class MeshIO(BaseIO):
         
         verts, normals, uvs, faces = tr.triangulateUV(obj, bm)
         v = len(verts)
+        vbuf = self.convert_to_bytes(verts, 'f')
         i = len(faces)
+        ibuf = self.convert_to_bytes(faces, 'I')
         mgr.load(v, vbuf, i, ibuf)

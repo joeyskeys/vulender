@@ -1,6 +1,6 @@
 
-engine_name = "EXAMPLE_RENDER"
-engine_label = "Bitto_Example"
+engine_name = "vkkk"
+engine_label = "vkkk"
 
 film_props = ()
 

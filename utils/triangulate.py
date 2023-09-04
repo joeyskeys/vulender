@@ -2,8 +2,6 @@ import bpy
 import mathutils
 
 from collections import deque
-from .frame import to_kazen_frame
-from ..pyzen import vec as pzvec
 
 
 def get_normal(verts):

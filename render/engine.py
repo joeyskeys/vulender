@@ -38,6 +38,11 @@ class BittoRenderEngine(bpy.types.RenderEngine):
 
     def render(self, depsgraph):
         ins = vk.VkInstance()
+        ins.init()
+        ins.create_logical_device()
+        ins.create_render_target("main", vk.R8G8B8A8_SRGB)
+        ins.create_renderpass(vk.R8G8B8A8_SRGB)
+
         sceneio = SceneIO()
         sceneio.feed_api(ins)
         # Setup rendering thread to keep blender responsive
