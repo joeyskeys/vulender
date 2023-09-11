@@ -37,4 +37,4 @@ class MeshIO(BaseIO):
         vbuf = self.convert_to_bytes(verts, 'f')
         i = len(faces)
         ibuf = self.convert_to_bytes(faces, 'I')
-        mgr.load(v, vbuf, i, ibuf)
+        mgr.load(obj.name, v, vbuf, i, ibuf)

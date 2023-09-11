@@ -1,5 +1,6 @@
 
 import bpy
+from .base import BaseIO
 from .camera import CameraIO
 from .film import FilmIO
 from .mesh import MeshIO
@@ -12,7 +13,7 @@ class SceneIO(BaseIO):
     """
     """
 
-    def __init__(self):
+    def __init__(self, ins):
         self.cameraio = CameraIO()
         self.filmio = FilmIO()
         self.meshio = MeshIO()
@@ -21,7 +22,7 @@ class SceneIO(BaseIO):
 
         self.camera = vk.Camera()
         self.meshmgr = vk.MeshMgr.Instance()
-        self.lightmgr = vk.LightMgr.Instance()
+        #self.lightmgr = vk.LightMgr.Instance()
 
     def write_description(self, handle):
         self.lightio.write_description(handle)
@@ -35,7 +36,7 @@ class SceneIO(BaseIO):
                 self.materialio.write_description(handle)
 
     def feed_api(self, ins):
-        self.filmio.feed_api(ins)
+        #self.filmio.feed_api(ins)
         self.cameraio.feed_api(self.camera, self.filmio.get_ratio())
         
         for obj in bpy.context.scene.objects:
@@ -44,6 +45,6 @@ class SceneIO(BaseIO):
 
             if obj.type == 'MESH':
                 self.meshio.feed_api(obj, self.meshmgr)
-                self.materialio.feed_api(obj)
+                #self.materialio.feed_api(obj)
             elif obj.type == 'LIGHT':
                 self.lightio.feed_api(obj, self.lightmgr)

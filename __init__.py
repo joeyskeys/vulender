@@ -5,7 +5,7 @@ from . import config
 # Sadly bl_info related fields cannot be put into config or it will coz an 
 # ast parse traceback
 bl_info = {
-    "name": "vkkk",
+    "name": "vulender",
     "author": "Joey Chen",
     "version": (0, 0, 1),
     "blender": (3, 2, 0),
