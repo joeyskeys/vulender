@@ -43,11 +43,11 @@ class BittoRenderEngine(bpy.types.RenderEngine):
         sceneio = SceneIO()
         sceneio.filmio.feed_api(ins)
 
-        ins.create_logical_device()
+        ins.create_logical_device(True)
         ins.create_render_target("main", vk.R8G8B8A8_SRGB)
         ins.create_renderpass(vk.R8G8B8A8_SRGB)
         ins.create_command_pool()
-        ins.create_color_resource()
+        ins.create_color_resource(vk.R8G8B8A8_SRGB)
         ins.create_depth_resource()
         ins.create_framebuffer_from_target("main")
 

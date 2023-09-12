@@ -238,9 +238,6 @@ def triangulateUV(obj, animated_mesh):
     # We add tuples to lists and then append them to a big list, 
     # then in mesh.py we decompose everything again. Not efficient.
 
-    all_new_vertices = map(to_kazen_frame, all_new_vertices)
-    all_new_normals = map(to_kazen_frame, all_new_normals)
-    
     return all_new_vertices, all_new_normals, all_new_uvs, all_new_triangles
 
 # Triangulate function that does not support UVs
@@ -283,8 +280,6 @@ def triangulate(obj, animated_mesh):
                 new_triangles += triangulate_a_quat(face_verts, face)
             else:
                 new_triangles += triangulate_a_ngon(face_verts, face)
-
-    verts = map(to_kazen_frame, verts)
 
     return verts, new_triangles
 

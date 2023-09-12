@@ -21,6 +21,17 @@ class MeshIO(BaseIO):
         ret = bytes()
         for e in data:
             ret += struct.pack(tmask * cnt, *e)
+        return ret
+
+    @staticmethod
+    def zip_to_bytes(datas, mask_list):
+        get_size = lambda l : len(l[0])
+        sizes = list(map(get_size, datas))
+        ret = bytes()
+        for i in range(len(datas[0])):
+            for j in range(len(datas)):
+                ret += struct.pack(mask_list[j] * sizes[j], *datas[j][i])
+        return ret
 
     def feed_api(self, obj, mgr):
         depgraph = bpy.context.evaluated_depsgraph_get()
@@ -34,7 +45,8 @@ class MeshIO(BaseIO):
         
         verts, normals, uvs, faces = tr.triangulateUV(obj, bm)
         v = len(verts)
-        vbuf = self.convert_to_bytes(verts, 'f')
+        #vbuf = self.convert_to_bytes(verts, 'f')
+        vbuf = self.zip_to_bytes((verts, normals, uvs), ('f', 'f', 'f'))
         i = len(faces)
         ibuf = self.convert_to_bytes(faces, 'I')
-        mgr.load(obj.name, v, vbuf, i, ibuf)
+        mgr.load(obj.name, [vk.VERTEX, vk.NORMAL, vk.UV], v, vbuf, i, ibuf)

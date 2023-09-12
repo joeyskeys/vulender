@@ -3,6 +3,7 @@ import bpy
 import mathutils
 import math
 from .base import BaseIO
+from .. import pyvkkk as vk
 
 
 class CameraIO(BaseIO):
@@ -24,16 +25,18 @@ class CameraIO(BaseIO):
         return eye_pos, look_vec, up_vec
 
     def get_fov(self):
-        return bpy.context.scene.data.camera.data.angle
+        return bpy.context.scene.camera.data.angle
 
     def get_props(self):
-        return bpy.context.scene.data.bitto_camera_props
+        return bpy.context.scene.camera.data.bitto_camera_props
 
     def write_description(self):
         pass
 
     def feed_api(self, cam, ratio):
-        cam.look_at(*self.get_camera_infos())
+        convert_to_vec3 = lambda v : vk.Vec3(*tuple(v))
+        params = map(convert_to_vec3, self.get_camera_infos())
+        cam.look_at(*params)
 
         fov = self.get_fov()
         props = self.get_props()

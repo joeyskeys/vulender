@@ -13,7 +13,7 @@ class SceneIO(BaseIO):
     """
     """
 
-    def __init__(self, ins):
+    def __init__(self):
         self.cameraio = CameraIO()
         self.filmio = FilmIO()
         self.meshio = MeshIO()
@@ -22,7 +22,7 @@ class SceneIO(BaseIO):
 
         self.camera = vk.Camera()
         self.meshmgr = vk.MeshMgr.Instance()
-        #self.lightmgr = vk.LightMgr.Instance()
+        self.lightmgr = vk.LightMgr.Instance()
 
     def write_description(self, handle):
         self.lightio.write_description(handle)
